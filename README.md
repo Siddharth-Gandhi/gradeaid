@@ -83,31 +83,11 @@ It was satisfying that our neural network model using 300-dimensional LSTM as in
 
 <table style="width: 100%" >
     <td align="center">
-        <a href="https://github.com/IAmOZRules">
-            <img src="https://avatars.githubusercontent.com/u/63207667?v=4" width="100px;" alt="Shreyaans Nahata" />
-            <br /><sub><b>Shreyaans Nahata</b></sub>
-        </a>
-        <br />
-    </td>
-    <td align="center">
         <a href="https://github.com/Siddharth-Gandhi">
             <img src="https://avatars.githubusercontent.com/u/61461606?v=4" width="100px;" alt="Siddharth" />
             <br /><sub><b>Siddharth Gandhi</b></sub>
         </a>
         <br />
     </td>
-    </td>
-        <td align="center">
-        <a href="https://github.com/Abhishek911cse">
-            <img src="https://avatars.githubusercontent.com/u/61340365?v=4" width="100px;" alt="Abhishek" />
-            <br /><sub><b>Abhishek Ramasubramanian</b></sub>
-        </a>
-        <br />
-    </td>
-    <td align="center">
-        <a href="https://github.com/ranjitmnair">
-            <img src="https://avatars.githubusercontent.com/u/58624792?v=4" width="100px;" alt="Ranjit" />
-            <br /><sub><b>Ranjit Nair</b></sub>
-        </a>
-        <br />
+
 </table> -->
