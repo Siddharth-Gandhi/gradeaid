@@ -79,9 +79,9 @@ In this project, we introduced a deep neural network model capable of representi
 
 It was satisfying that our neural network model using 300-dimensional LSTM as initialization to the embedding layer was our most successful model. We believe that a more extensive hyperparameter search with our LSTM based models could outperform this result. There are many ideas moving forward. Trying out the models in Ensemble mode is also an extension we wish to try out in the near future.
 
-## Contributors
+<!-- ## Contributors
 
-<!-- <table style="width: 100%" >
+<table style="width: 100%" >
     <td align="center">
         <a href="https://github.com/IAmOZRules">
             <img src="https://avatars.githubusercontent.com/u/63207667?v=4" width="100px;" alt="Shreyaans Nahata" />
