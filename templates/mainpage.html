@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="icon" type="image/x-icon" href="/static/gradeaid.png" /> -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons -->
+    <link href="static/assets/Tests-icon.png" rel="icon" />
+
+    <title>GradeAid - An Exam Grading Assistant</title>
+
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet" />
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="mui-panel">
+      <div class="container d-flex align-items-center justify-content-between">
+        <a href="/">
+          <span style="display: flex; align-items: center">
+            <img src="static/assets/Tests-icon.png" alt="Logo" width="40px" />
+            <h1 class="logo">GradeAid</h1>
+          </span>
+        </a>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto" href="/">Home</a></li>
+            <li>
+              <a class="nav-link scrollto active" href="/upload"
+                >Grade Answers</a
+              >
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+    <main>
+      <ul class="mui-tabs__bar">
+        <li class="mui--is-active">
+          <a data-mui-toggle="tab" data-mui-controls="pane-default-1"
+            >Text Only</a
+          >
+        </li>
+        <!-- <li>
+          <a data-mui-toggle="tab" data-mui-controls="pane-default-2"
+            >OCR Grading</a
+          >
+        </li> -->
+      </ul>
+      <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
+        <div id="input_area1" class="input_area">
+          <section id="input_text1" class="mui-panel input_text">
+            <textarea
+              rows="20"
+              class="input_text_area"
+              id="input_text_area1"
+              placeholder="Student's Answer"
+            ></textarea>
+            <textarea
+              rows="10"
+              class="answer_key"
+              id="answer_key1"
+              style="display: none"
+              placeholder="Answer Key"
+            ></textarea>
+          </section>
+          <div class="results mui-panel">
+            <div id="output1" class="output mui-panel">
+              <h1>Score</h1>
+            </div>
+            <div id="feedback1" class="output mui-panel">
+              <h1>Feedback</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions_area" id="actions_area1">
+          <div id="grammar_weightage_div1" style="display: none">
+            <!-- <span class="grammar_weightage_value" id="grammar_weightage_value1"
+              >50</span
+            > -->
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <div class="semantic_wrapper" style="display: none">
+              <span style="text-align: center">Scoring Weightage</span>
+              <div>
+                <span>Grammar Weightage</span>
+                <span id="grammar_value1" class="grammar_value">(50%)</span>
+                <input
+                  type="range"
+                  name="grammar_weightage1"
+                  class="grammar_weightage"
+                  id="grammar_weightage1"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="50"
+                  onchange="updateGrammarWeight(1)"
+                />
+                <span id="semantic_value1" class="semantic_value">(50%)</span>
+                <span>Semantic Weightage</span>
+              </div>
+            </div>
+          </div>
+          <div id="semantic_strictness_div1" style="display: none">
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <div class="semantic_wrapper" style="display: none">
+              <span
+                id="slider2_label1"
+                class="slider2_label"
+                style="text-align: center"
+                >Semantic Strictness :
+                <span
+                  class="semantic_strictness_value"
+                  id="semantic_strictness_value1"
+                  >0.5</span
+                >
+              </span>
+
+              <div>
+                <span>Less Strict</span>
+                <input
+                  type="range"
+                  name="semantic_strictness1"
+                  class="semantic_strictness"
+                  id="semantic_strictness1"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.85"
+                  onchange="updateSemanticStrictness(1)"
+                />
+                <span>More Strict</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            Toggle Answer Key
+            <label class="switch">
+              <input
+                type="checkbox"
+                id="toggleAnswer1"
+                onchange="toggleAnswerKey(1)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
+              onclick="senddata(1)"
+            >
+              Grade the Answer!
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mui-tabs__pane" id="pane-default-2">
+        <div id="input_area2" class="input_area">
+          <section id="image">
+            <img
+              id="uploaded_image"
+              alt="Upload an Image to view"
+            /><br /><br />
+            <input id="image_input" type="file" name="name" accept="image/*" />
+          </section>
+          <section id="input_text2" class="mui-panel input_text">
+            <textarea
+              rows="20"
+              class="input_text_area"
+              id="input_text_area2"
+              placeholder="Student's Answer"
+            ></textarea>
+            <textarea
+              rows="10"
+              class="answer_key"
+              id="answer_key2"
+              style="display: none"
+              placeholder="Answer Key"
+            ></textarea>
+          </section>
+          <div class="results mui-panel" id="results2">
+            <div id="output2" class="output mui-panel">
+              <h1>Score</h1>
+            </div>
+            <div id="feedback2" class="output mui-panel">
+              <h1>Feedback</h1>
+            </div>
+          </div>
+        </div>
+        <div class="actions_area" id="actions_area2">
+          <div id="grammar_weightage_div2" style="display: none">
+            <!-- <span class="grammar_weightage_value" id="grammar_weightage_value2"
+              >50</span
+            > -->
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <div class="semantic_wrapper">
+              <span style="text-align: center">Scoring Weightage</span>
+              <div>
+                <span>Grammar Weightage</span>
+                <span id="grammar_value2" class="grammar_value">(50%)</span>
+                <input
+                  type="range"
+                  name="grammar_weightage2"
+                  class="grammar_weightage"
+                  id="grammar_weightage2"
+                  min="0"
+                  max="100"
+                  step="1"
+                  onchange="updateGrammarWeight(2)"
+                />
+                <span id="semantic_value2" class="semantic_value">(50%)</span>
+                <span>Semantic Weightage</span>
+              </div>
+            </div>
+          </div>
+          <div id="semantic_strictness_div2" style="display: none">
+            <!-- <label for="grammar_weightage1">Grammar Weightage</label> -->
+            <div class="semantic_wrapper">
+              <span
+                id="slider2_label2"
+                class="slider2_label"
+                style="text-align: center"
+                >Semantic Strictness :
+                <span
+                  class="semantic_strictness_value"
+                  id="semantic_strictness_value2"
+                  >0.5</span
+                >
+              </span>
+              <div>
+                <span>Less Strict</span>
+                <input
+                  type="range"
+                  name="semantic_strictness2"
+                  class="semantic_strictness"
+                  id="semantic_strictness2"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  onchange="updateSemanticStrictness(2)"
+                />
+                <span>More Strict</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            Toggle Answer Key
+            <label class="switch">
+              <input
+                type="checkbox"
+                id="toggleAnswer2"
+                onchange="toggleAnswerKey(2)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--primary"
+              onclick="senddata(2)"
+            >
+              Grade the Answer!
+            </button>
+            <button
+              type="button"
+              class="mui-btn mui-btn--raised mui-btn--danger"
+              onclick="sendImage()"
+            >
+              Perform OCR!
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Template Main JS File -->
+    <script>
+      (function () {
+        'use strict';
+
+        /**
+         * Easy selector helper function
+         */
+        const select = (el, all = false) => {
+          el = el.trim();
+          if (all) {
+            return [...document.querySelectorAll(el)];
+          } else {
+            return document.querySelector(el);
+          }
+        };
+
+        /**
+         * Easy event listener function
+         */
+        const on = (type, el, listener, all = false) => {
+          let selectEl = select(el, all);
+          if (selectEl) {
+            if (all) {
+              selectEl.forEach((e) => e.addEventListener(type, listener));
+            } else {
+              selectEl.addEventListener(type, listener);
+            }
+          }
+        };
+
+        /**
+         * Easy on scroll event listener
+         */
+        const onscroll = (el, listener) => {
+          el.addEventListener('scroll', listener);
+        };
+
+        /**
+         * Navbar links active state on scroll
+         */
+        let navbarlinks = select('#navbar .scrollto', true);
+        const navbarlinksActive = () => {
+          let position = window.scrollY + 200;
+          navbarlinks.forEach((navbarlink) => {
+            if (!navbarlink.hash) return;
+            let section = select(navbarlink.hash);
+            if (!section) return;
+            if (
+              position >= section.offsetTop &&
+              position <= section.offsetTop + section.offsetHeight
+            ) {
+              navbarlink.classList.add('active');
+            } else {
+              navbarlink.classList.remove('active');
+            }
+          });
+        };
+        window.addEventListener('load', navbarlinksActive);
+        onscroll(document, navbarlinksActive);
+
+        /**
+         * Scrolls to an element with header offset
+         */
+        const scrollto = (el) => {
+          let header = select('#header');
+          let offset = header.offsetHeight;
+
+          if (!header.classList.contains('header-scrolled')) {
+            offset -= 16;
+          }
+
+          let elementPos = select(el).offsetTop;
+          window.scrollTo({
+            top: elementPos - offset,
+            behavior: 'smooth',
+          });
+        };
+
+        /**
+         * Toggle .header-scrolled class to #header when page is scrolled
+         */
+        let selectHeader = select('#header');
+        if (selectHeader) {
+          const headerScrolled = () => {
+            if (window.scrollY > 100) {
+              selectHeader.classList.add('header-scrolled');
+            } else {
+              selectHeader.classList.remove('header-scrolled');
+            }
+          };
+          window.addEventListener('load', headerScrolled);
+          onscroll(document, headerScrolled);
+        }
+
+        /**
+         * Back to top button
+         */
+        let backtotop = select('.back-to-top');
+        if (backtotop) {
+          const toggleBacktotop = () => {
+            if (window.scrollY > 100) {
+              backtotop.classList.add('active');
+            } else {
+              backtotop.classList.remove('active');
+            }
+          };
+          window.addEventListener('load', toggleBacktotop);
+          onscroll(document, toggleBacktotop);
+        }
+
+        /**
+         * Mobile nav toggle
+         */
+        on('click', '.mobile-nav-toggle', function (e) {
+          select('#navbar').classList.toggle('navbar-mobile');
+          this.classList.toggle('bi-list');
+          this.classList.toggle('bi-x');
+        });
+
+        /**
+         * Mobile nav dropdowns activate
+         */
+        on(
+          'click',
+          '.navbar .dropdown > a',
+          function (e) {
+            if (select('#navbar').classList.contains('navbar-mobile')) {
+              e.preventDefault();
+              this.nextElementSibling.classList.toggle('dropdown-active');
+            }
+          },
+          true
+        );
+
+        /**
+         * Scrool with ofset on links with a class name .scrollto
+         */
+        on(
+          'click',
+          '.scrollto',
+          function (e) {
+            if (select(this.hash)) {
+              e.preventDefault();
+
+              let navbar = select('#navbar');
+              if (navbar.classList.contains('navbar-mobile')) {
+                navbar.classList.remove('navbar-mobile');
+                let navbarToggle = select('.mobile-nav-toggle');
+                navbarToggle.classList.toggle('bi-list');
+                navbarToggle.classList.toggle('bi-x');
+              }
+              scrollto(this.hash);
+            }
+          },
+          true
+        );
+
+        /**
+         * Scroll with ofset on page load with hash links in the url
+         */
+        window.addEventListener('load', () => {
+          if (window.location.hash) {
+            if (select(window.location.hash)) {
+              scrollto(window.location.hash);
+            }
+          }
+        });
+      })();
+    </script>
+
+    <script>
+      function activateModal() {
+        // initialize modal element
+        var modalEl = document.createElement('div');
+        let loader = document.createElement('div');
+        loader.id = 'loading';
+        let ring = document.createElement('div');
+        ring.classList.add('lds-dual-ring');
+        // ring.style.zIndex = "1000";
+        loader.appendChild(ring);
+        modalEl.appendChild(loader);
+        // <div id="loading">
+        //       <div class="lds-dual-ring"></div>
+        //     </div>
+        modalEl.style.width = '400px';
+        modalEl.style.height = '300px';
+        modalEl.style.margin = '100px auto';
+        modalEl.style.backgroundColor = 'transparent';
+
+        // show modal
+        mui.overlay('on', modalEl);
+      }
+
+      // updateGrammarWeight(1);
+
+      // function updateSliderValue(id) {
+      //   var grammar_slider = document.getElementById("grammar_weightage" + id);
+      //   grammar_slider.addEventListener("change", function () {
+      //     document.getElementById(
+      //       "grammar_field" + id
+      //     ).innerHTML = `Grammar Weightage (${grammar_weightage.value}%)`;
+      //     document.getElementById(
+      //       "semantic_field1" + id
+      //     ).innerHTML = `Semantic Weightage (${100 - grammar_weightage.value}%)`;
+      //   });
+      // }
+
+      function roundToTwoDecimals(num) {
+        return +(Math.round(num + 'e+2') + 'e-2');
+      }
+
+      function updateGrammarWeight(id) {
+        // console.log(id);
+        // document.getElementById("grammar_weightage_value" + id).innerText =
+        //   `(${document.getElementById("grammar_weightage" + id).value})`;
+        document.getElementById('grammar_value' + id).innerText = `(${
+          document.getElementById('grammar_weightage' + id).value
+        }%)`;
+        document.getElementById('semantic_value' + id).innerText = `(${
+          100 - document.getElementById('grammar_weightage' + id).value
+        }%)`;
+      }
+
+      function updateSemanticStrictness(id) {
+        document.getElementById('semantic_strictness_value' + id).innerText =
+          document.getElementById('semantic_strictness' + id).value;
+      }
+
+      function toggleAnswerKey(id) {
+        let curr = document.getElementById('answer_key' + id).style.display;
+        if (curr === 'none') {
+          document.getElementById('answer_key' + id).style.display = 'block';
+          document.getElementById(
+            'semantic_strictness_div' + id
+          ).style.display = 'block';
+          document.getElementById('grammar_weightage_div' + id).style.display =
+            'block';
+        } else {
+          document.getElementById('answer_key' + id).style.display = 'none';
+          document.getElementById(
+            'semantic_strictness_div' + id
+          ).style.display = 'none';
+          document.getElementById('grammar_weightage_div' + id).style.display =
+            'none';
+        }
+      }
+
+      function senddata(id) {
+        var text = document.getElementById('input_text_area' + id);
+        let checked = document.getElementById('toggleAnswer' + id);
+        // const checkbox = document.getElementById("toggleAnswer");
+        let grammar_weightage, semantic_strictness, answer_key;
+        if (checked) {
+          grammar_weightage = document.getElementById(
+            'grammar_weightage' + id
+          ).value;
+          semantic_strictness = document.getElementById(
+            'semantic_strictness' + id
+          ).value;
+          answer_key = document.getElementById('answer_key' + id).value;
+        }
+        // grammar_weightage1
+        var output = document.getElementById('output' + id);
+        if (!text.value) return;
+        const obj = {
+          text: text.value,
+          semantic_strictness,
+          answer_key,
+        };
+        let feedback_area = document.getElementById('feedback' + id);
+        activateModal();
+        const str = JSON.stringify(obj);
+        fetch('http://127.0.0.1:5000/grade', {
+          method: 'POST',
+          body: JSON.stringify(obj),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            mui.overlay('off');
+            if (!result) {
+              output.innerHTML = '<h3>Sorry, something went wrong!</h3>';
+            } else {
+              if (checked.checked) {
+                final_score =
+                  grammar_weightage * result.score +
+                  (100 - grammar_weightage) *
+                    result.semantic_score.semantic_score;
+
+                output.innerHTML = `
+                  <h2>Grammar Score = ${result.score}/10</h2>
+                  <h2>Semantic Score = ${roundToTwoDecimals(
+                    result.semantic_score.semantic_score
+                  )}/10</h2>
+                  <h1>Final Score = <span class="score">${roundToTwoDecimals(
+                    final_score / 100
+                  )}</span>/10</h1>
+                `;
+                feedback_data =
+                  result.semantic_score.key_sentences_not_in_answer;
+                feedback_area.innerHTML = `
+                  <h2 class="feedback_heading">Key points not in Answer</h2>
+                  <p align="left">
+                  ${feedback_data
+                    .map((data) => `<li class="list_item">${data}</li>`)
+                    .join('')}
+                    </p>
+                `;
+              } else {
+                output.innerHTML = `
+                  <h1>Final Score = <span class="score">${roundToTwoDecimals(
+                    result.score
+                  )}</span>/10</h1>
+                `;
+
+                feedback_area.innerHTML = `<h3>Feedback not available for normal grading!<h3>`;
+              }
+            }
+            console.log('Success:', result);
+          })
+          .catch((error) => {
+            mui.overlay('off');
+            console.error('Error:', error);
+          });
+      }
+
+      document.getElementById('image_input').onchange = function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById('uploaded_image').src = e.target.result;
+          document.getElementById('uploaded_image').alt = 'Input Image';
+          document.getElementById('uploaded_image').style.border =
+            '1px solid black';
+          document.getElementById('image_input').style.display = 'none';
+        };
+        reader.readAsDataURL(this.files[0]);
+      };
+
+      // send image to backend server
+      function sendImage() {
+        var image = document.getElementById('image_input');
+        var text = document.getElementById('input_text_area2');
+        var formData = new FormData();
+        if (!image.files[0]) return;
+        console.log(image.files, image.value);
+        formData.append('image', image.files[0]);
+        activateModal();
+        fetch('http://127.0.0.1:5000/ocr', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            mui.overlay('off');
+            text.value = result.text;
+            console.log('Success:', result);
+          })
+          .catch((error) => {
+            mui.overlay('off');
+            console.error('Error:', error);
+          });
+      }
+    </script>
+  </body>
+</html>
